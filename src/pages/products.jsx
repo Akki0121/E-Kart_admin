@@ -9,13 +9,14 @@ const Products = () => {
   const fetchproducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/admin/getproducts"
+        `${import.meta.env.VITE_API_URL}/admin/getproducts`
+        // "http://localhost:3000/admin/getproducts"
       );
       setProducts(response.data);
       setLoading(false);
     } catch (err) {
       console.error("Error fetching products:", err);
-      setError("Failed to fetch products");
+      setError(err?.response?.data?.message || "Error fetching sellers");
       setLoading(false);
     }
   };
@@ -28,7 +29,11 @@ const Products = () => {
       <div className="bg-slate-300 text-black p-10 rounded-md space-y-6">
         <h1 className="text-4xl">Manage Products</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
-        {error && <p>{error}</p>}
+        {error && (
+          <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md">
+            {error}
+          </p>
+        )}
         <table className="border-2">
           <tr>
             <th className="border-x-2 px-3 py-1 text-lg">Product Name</th>

@@ -11,7 +11,8 @@ const Orders = () => {
     setLoading(true);
     try {
       const response = await axios?.get(
-        "http://localhost:3000/admin/getorders"
+        `${import.meta.env.VITE_API_URL}/admin/getorders`
+        // "http://localhost:3000/admin/getorders"
       );
       setOrders(response?.data);
       console.log(response?.data);
@@ -31,7 +32,11 @@ const Orders = () => {
       <div className="bg-slate-300 text-black p-10 rounded-md space-y-6">
         <h1 className="text-4xl">Manage Orders</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
-        {/* {error && <p>{error}</p>} */}
+        {error && (
+          <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md">
+            {error}
+          </p>
+        )}
         <table className="border-2">
           <tr>
             <th className="border-x-2 px-3 py-1 text-lg">Products</th>

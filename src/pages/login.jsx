@@ -14,10 +14,13 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:3000/admin/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/admin/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       console.log("Login successful:", response.data.message);
 
@@ -28,7 +31,7 @@ const Login = () => {
       );
       console.error("Login error:", error);
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false);
     }
   };
 
