@@ -1,11 +1,3 @@
-// import React from "react";
-
-// function users() {
-//   return <div className="text-4xl">Manage Users</div>;
-// }
-
-// export default users;
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -25,7 +17,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
     fetchUsers();
   }, []);
 
@@ -35,17 +27,17 @@ const Users = () => {
         <h1 className="text-4xl">Manage Users</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
         {/* {error && <p>{error}</p>} Show error message */}
-        <table>
+        <table className="border-2">
           <tr>
-            <th>Username</th>
-            <th>Phone Number</th>
-            <th>Email</th>
+            <th className="border-x-2">Username</th>
+            <th className="border-x-2">Phone Number</th>
+            <th className="border-x-2">Email</th>
           </tr>
           {users.map((user) => (
-            <tr>
-              <td>{user.name}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
+            <tr className="border-y-2">
+              <td className="border-x-2">{user.name}</td>
+              <td className="border-x-2">{user.phone}</td>
+              <td className="border-x-2">{user.email}</td>
             </tr>
           ))}
         </table>

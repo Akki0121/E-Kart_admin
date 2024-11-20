@@ -14,7 +14,7 @@ const Orders = () => {
         "http://localhost:3000/admin/getorders"
       );
       setOrders(response?.data);
-
+      console.log(response?.data);
       setLoading(false);
     } catch (err) {
       console.error("Error fetching orders:", err);
@@ -22,7 +22,7 @@ const Orders = () => {
       setLoading(false);
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
     fetchOrders();
   }, []);
 
@@ -32,19 +32,35 @@ const Orders = () => {
         <h1 className="text-4xl">Manage Orders</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
         {/* {error && <p>{error}</p>} */}
-        <table>
+        <table className="border-2">
           <tr>
-            <th>Products</th>
-            <th>Bill Amount</th>
-            <th>Address</th>
-            <th>payment Status</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Products</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Quantity</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Bill Amount</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Address</th>
+            <th className="border-x-2 px-3 py-1 text-lg">payment Status</th>
           </tr>
           {orders?.map((elm) => (
-            <tr>
-              <td>{elm.items.productId}</td>
-              <td>{elm.amount}</td>
-              <td>{elm.address}</td>
-              <td>{elm.payment}</td>
+            <tr className="border-y-2">
+              <td>
+                {elm?.items?.map((el) => (
+                  <ul className="border-r-2">
+                    <li>{el?.productId?.name}</li>
+                  </ul>
+                ))}
+              </td>
+              <td>
+                {elm?.items?.map((el) => (
+                  <ul className="border-r-2">
+                    <li>{el?.quantity}</li>
+                  </ul>
+                ))}
+              </td>
+              <td className="border-x-2 px-3 py-1 text-lg">{elm?.amount}</td>
+              <td className="border-x-2 px-3 py-1 text-lg">{elm?.address}</td>
+              <td className="border-x-2 px-3 py-1 text-lg">
+                {String(elm?.payment)}
+              </td>
             </tr>
           ))}
         </table>

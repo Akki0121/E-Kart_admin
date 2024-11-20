@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -26,6 +27,7 @@ const Register = () => {
 
       setSuccess(response.data.message); // Display success message
       console.log("Registration successful:", response.data);
+      window.location.href = "/login";
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred.");
       console.error("Registration error:", error);
@@ -34,7 +36,10 @@ const Register = () => {
 
   return (
     <div className="register flex items-center justify-center h-screen">
-      <div className="bg-slate-200 p-8 rounded-lg shadow-md w-96 space-y-4 flex flex-col justify-center">
+      <form
+        onSubmit={handleRegister}
+        className="bg-slate-200 p-8 rounded-lg shadow-md w-96 space-y-4 flex flex-col justify-center"
+      >
         <h2 className="text-2xl font-semibold text-center">Admin Register</h2>
 
         {error && (
@@ -54,6 +59,7 @@ const Register = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name"
+            required
           />
         </div>
         <div>
@@ -64,6 +70,7 @@ const Register = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Phone"
+            required
           />
         </div>
         <div>
@@ -74,6 +81,7 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            required
           />
         </div>
         <div>
@@ -84,15 +92,22 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            required
           />
         </div>
         <button
           className="px-3 py-1 bg-blue-500 rounded-md text-white font-semibold"
-          onClick={handleRegister}
+          type="submit"
         >
           Submit
         </button>
-      </div>
+        <p className=" text-center text-sm">
+          Already have an Account ?{" "}
+          <Link className="text-orange-800 text-md" to="/login">
+            Sign In
+          </Link>
+        </p>
+      </form>
     </div>
   );
 };

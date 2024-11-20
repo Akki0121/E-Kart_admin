@@ -1,11 +1,3 @@
-// import React from "react";
-
-// function sellers() {
-//   return <div className="text-4xl">Manage Users</div>;
-// }
-
-// export default users;
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -27,7 +19,7 @@ const Sellers = () => {
       setLoading(false);
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
     fetchsellers();
   }, []);
 
@@ -37,14 +29,14 @@ const Sellers = () => {
         <h1 className="text-4xl">Manage sellers</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
         {/* {error && <p>{error}</p>} Show error message */}
-        <table>
+        <table className="border-2">
           <tr>
             <th>Username</th>
             <th>Phone Number</th>
             <th>Email</th>
           </tr>
           {sellers.map((elm) => (
-            <tr>
+            <tr className="border-y-2">
               <td>{elm.name}</td>
               <td>{elm.phone}</td>
               <td>{elm.email}</td>

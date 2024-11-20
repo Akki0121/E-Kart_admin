@@ -19,7 +19,7 @@ const Products = () => {
       setLoading(false);
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
     fetchproducts();
   }, []);
 
@@ -29,17 +29,19 @@ const Products = () => {
         <h1 className="text-4xl">Manage Products</h1>
         {loading && <p>Loading...</p>} {/* Show loading state */}
         {error && <p>{error}</p>}
-        <table>
+        <table className="border-2">
           <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Description</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Product Name</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Price</th>
+            <th className="border-x-2 px-3 py-1 text-lg">Description</th>
           </tr>
           {products.map((elm) => (
-            <tr>
-              <td>{elm.name}</td>
-              <td>{elm.price}</td>
-              <td>{elm.description}</td>
+            <tr className="border-y-2">
+              <td className="border-x-2 px-3 py-1 text-lg">{elm.name}</td>
+              <td className="border-x-2 px-3 py-1 text-lg">{elm.price}</td>
+              <td className="border-x-2 px-3 py-1 text-lg">
+                {elm.description}
+              </td>
             </tr>
           ))}
         </table>
