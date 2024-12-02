@@ -1,50 +1,38 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import HamSidebar from "./HamSidebar";
 
 function layout() {
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+  });
 
   useEffect(() => {
-    console.log("Layout mounted");
-    setIsInitialized(true);
+    const handleResize = () => {
+      setScreenSize({ width: window.innerWidth });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  if (!isInitialized) return <p>Loading layout...</p>;
   return (
-    <div className="flex ">
-      <Sidebar />
-      <div className="flex-1">
-        <Navbar />
-        <main>
-          <Outlet />
-        </main>
+    <div>
+      <div className="flex ">
+        {screenSize.width < 768 ? <HamSidebar /> : <Sidebar />}
+        {/* <Sidebar /> */}
+        <div className="flex-1">
+          <main>
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
 }
 
 export default layout;
-
-// import { Outlet } from "react-router-dom";
-// import Navbar from "./navbar";
-// import Sidebar from "./sidebar";
-
-// const Layout = () => {
-//   console.log("this is layout");
-//   return (
-//     <div className="flex ">
-//       <Sidebar />
-//       <div className="flex-1">
-//         <Navbar />
-//         <main>
-//           <Outlet />
-//         </main>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Layout;

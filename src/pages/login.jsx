@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AdminContext } from "../context/adminContext";
 
 const Login = () => {
+  const { isAdminLoggedIn, checkAdminLoginStatus } = useContext(AdminContext);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // To display login errors
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); // Loading state
 
   const handleLogin = async (e) => {
@@ -16,15 +19,15 @@ const Login = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/admin/login`,
+        // "http://localhost:3000/admin/login",
         {
           email,
           password,
         }
       );
-
-      console.log("Login successful:", response.data.message);
-
-      window.location.href = "/admin/dashboard";
+      if (response.status === 200) {
+        await checkAdminLoginStatus();
+      }
     } catch (error) {
       setError(
         error.response?.data?.message || "An error occurred during login."
@@ -34,6 +37,12 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isAdminLoggedIn) {
+      navigate("/admin/dashboard");
+    }
+  }, [isAdminLoggedIn]);
 
   return (
     <div className="login flex items-center justify-center h-screen">
@@ -71,9 +80,9 @@ const Login = () => {
         </button>
         <p className=" text-center text-sm">
           Don't have an Account ?{" "}
-          <Link className="text-orange-800 text-md" to="/register">
+          <NavLink className="text-orange-800 text-md" to="/register">
             Register
-          </Link>
+          </NavLink>
         </p>
       </form>
     </div>

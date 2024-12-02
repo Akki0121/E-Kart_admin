@@ -1,75 +1,88 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { data } from "autoprefixer";
-
+import { useEffect, useContext } from "react";
+import { AdminContext } from "../context/adminContext";
+import Loader from "../components/loader";
+import { TiTick } from "react-icons/ti";
+import { ImCross } from "react-icons/im";
 const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      const response = await axios?.get(
-        `${import.meta.env.VITE_API_URL}/admin/getorders`
-        // "http://localhost:3000/admin/getorders"
-      );
-      setOrders(response?.data);
-      console.log(response?.data);
-      setLoading(false);
-    } catch (err) {
-      console.error("Error fetching orders:", err);
-      setError("Failed to fetch orders");
-      setLoading(false);
-    }
-  };
+  const { fetchOrders, orders } = useContext(AdminContext);
   useEffect(() => {
     fetchOrders();
   }, []);
 
   return (
-    <div className="flex justify-center p-5">
-      <div className="bg-slate-300 text-black p-10 rounded-md space-y-6">
-        <h1 className="text-4xl">Manage Orders</h1>
-        {loading && <p>Loading...</p>} {/* Show loading state */}
-        {error && (
-          <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md">
-            {error}
-          </p>
-        )}
-        <table className="border-2">
-          <tr>
-            <th className="border-x-2 px-3 py-1 text-lg">Products</th>
-            <th className="border-x-2 px-3 py-1 text-lg">Quantity</th>
-            <th className="border-x-2 px-3 py-1 text-lg">Bill Amount</th>
-            <th className="border-x-2 px-3 py-1 text-lg">Address</th>
-            <th className="border-x-2 px-3 py-1 text-lg">payment Status</th>
-          </tr>
-          {orders?.map((elm) => (
-            <tr className="border-y-2">
-              <td>
-                {elm?.items?.map((el) => (
-                  <ul className="border-r-2">
-                    <li>{el?.productId?.name}</li>
-                  </ul>
-                ))}
-              </td>
-              <td>
-                {elm?.items?.map((el) => (
-                  <ul className="border-r-2">
-                    <li>{el?.quantity}</li>
-                  </ul>
-                ))}
-              </td>
-              <td className="border-x-2 px-3 py-1 text-lg">{elm?.amount}</td>
-              <td className="border-x-2 px-3 py-1 text-lg">{elm?.address}</td>
-              <td className="border-x-2 px-3 py-1 text-lg">
-                {String(elm?.payment)}
-              </td>
+    <div className="p-4">
+      <h1 className="text-3xl text-center my-3 font-semibold">Orders</h1>
+      {orders?.error && (
+        <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
+          {orders.error}
+        </p>
+      )}
+      {orders?.loader ? (
+        <p className="flex justify-center">
+          <Loader />
+        </p>
+      ) : (
+        <table className="table-auto  border-spacing-3  text-left">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                OrderId
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                Products
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                Quantity
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                Bill Amount
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                Address
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-xl font-medium text-gray-700">
+                Payment Status
+              </th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {orders?.data?.map((elm, rowIndex) => (
+              <tr className={rowIndex % 2 === 0 ? "bg-gray-50" : "bg-white"}>
+                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                  {elm?.generatedId}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-md text-gray-600">
+                  {elm?.items?.map((el) => (
+                    <ul>
+                      <li>{el?.productId?.name}</li>
+                    </ul>
+                  ))}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                  {elm?.items?.map((el) => (
+                    <ul>
+                      <li>{el?.quantity}</li>
+                    </ul>
+                  ))}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                  {elm?.amount}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                  {elm?.address}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600 ">
+                  {String(elm?.payment) === "false" ? (
+                    <ImCross className="text-red-600" />
+                  ) : (
+                    <TiTick className="text-green-600 text-2xl" />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,57 +1,94 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
+import { useEffect, useContext } from "react";
+import { AdminContext } from "../context/adminContext";
+import Loader from "../components/loader";
+import TableComponent from "../components/table";
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { fetchProducts, products } = useContext(AdminContext);
+  // const [products, setProducts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
 
-  const fetchproducts = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/admin/getproducts`
-        // "http://localhost:3000/admin/getproducts"
-      );
-      setProducts(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.error("Error fetching products:", err);
-      setError(err?.response?.data?.message || "Error fetching sellers");
-      setLoading(false);
-    }
-  };
+  // const fetchproducts = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await axios.get(
+  //       `${import.meta.env.VITE_API_URL}/admin/getproducts`
+  //       // "http://localhost:3000/admin/getproducts"
+  //     );
+  //     setProducts(response.data);
+  //   } catch (err) {
+  //     console.error("Error fetching products:", err);
+  //     setError(err?.response?.data?.message || "Error fetching sellers");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   useEffect(() => {
-    fetchproducts();
+    fetchProducts();
   }, []);
 
+  const columns = [
+    { header: "Images", field: "images" },
+    { header: "Name", field: "name" },
+    { header: "Price", field: "price" },
+    { header: "Description", field: "description" },
+  ];
+
+  const data = products?.data?.map((elm) => ({
+    images: elm?.imageUrl,
+    name: elm?.name,
+    price: "₹" + elm?.price,
+    description: elm?.description,
+  }));
+
   return (
-    <div className="flex justify-center p-5">
-      <div className="bg-slate-300 text-black p-10 rounded-md space-y-6">
-        <h1 className="text-4xl">Manage Products</h1>
-        {loading && <p>Loading...</p>} {/* Show loading state */}
-        {error && (
-          <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md">
-            {error}
-          </p>
-        )}
-        <table className="border-2">
-          <tr>
-            <th className="border-x-2 px-3 py-1 text-lg">Product Name</th>
-            <th className="border-x-2 px-3 py-1 text-lg">Price</th>
-            <th className="border-x-2 px-3 py-1 text-lg">Description</th>
-          </tr>
-          {products.map((elm) => (
-            <tr className="border-y-2">
-              <td className="border-x-2 px-3 py-1 text-lg">{elm.name}</td>
-              <td className="border-x-2 px-3 py-1 text-lg">{elm.price}</td>
-              <td className="border-x-2 px-3 py-1 text-lg">
-                {elm.description}
-              </td>
-            </tr>
-          ))}
-        </table>
-      </div>
+    <div className="p-4">
+      <h1 className="text-3xl text-center my-3 font-semibold">All Products</h1>
+      {products?.error && (
+        <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
+          {error}
+        </p>
+      )}
+      {products?.loader ? (
+        <p className="flex justify-center">
+          <Loader />
+        </p>
+      ) : (
+        <TableComponent columns={columns} data={data} />
+      )}
     </div>
+    // <div className="flex justify-center ">
+    //   <div className="bg-slate-300 mt-10 rounded-lg p-8">
+    //     <h1 className="text-3xl text-center my-3">Manage Products</h1>
+    //     {error && (
+    //       <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
+    //         {error}
+    //       </p>
+    //     )}
+    //     {loading ? (
+    //       <p className="flex justify-center">
+    //         <Loader />
+    //       </p>
+    //     ) : (
+    //       <table className="table-auto  border-spacing-3  text-left">
+    //         <tr>
+    //           <th className="px-4 py-1 text-2xl font-medium">Name</th>
+    //           <th className="px-4 py-1 text-2xl font-medium">Price</th>
+    //           <th className="px-4 py-1 text-2xl font-medium">Description</th>
+    //         </tr>
+    //         {products.map((elm) => (
+    //           <tr>
+    //             <td className="px-4 py-1 text-lg font-medium">{elm.name}</td>
+    //             <td className="px-4 py-1 text-lg font-medium">{elm.price}</td>
+    //             <td className="px-4 py-1 text-lg font-medium">
+    //               {elm.description}
+    //             </td>
+    //           </tr>
+    //         ))}
+    //       </table>
+    //     )}
+    //   </div>
+    // </div>
   );
 };
 
