@@ -25,44 +25,44 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className=" bg-slate-300 h-screen sticky top-0 border-r-2 border-slate-500">
+    <div className=" bg-slate-300 h-screen sticky top-0 border-r border-slate-800">
       <div className="hidden bg-slate-800 md:flex justify-center">
         <img className="w-44 h-14 px-2 py-2 " src={Logo} alt="logo image" />
       </div>
       <div className="bg-transparent md:bg-slate-300">
         <NavLink
           to="/admin/dashboard"
-          className="block text-xl font-semibold w-full border-t-2 border-black hover:bg-slate-800 hover:text-white px-16 py-3"
+          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16 py-3"
         >
           Dashboard
         </NavLink>
         <NavLink
           to="/admin/users"
-          className="block text-xl font-semibold w-full border-t-2 border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
         >
           Users
         </NavLink>
         <NavLink
           to="/admin/sellers"
-          className="block text-xl font-semibold w-full border-t-2 border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
         >
           Sellers
         </NavLink>
         <NavLink
           to="/admin/products"
-          className="block text-xl font-semibold w-full border-t-2 border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
         >
           Products
         </NavLink>
         <NavLink
           to="/admin/orders"
-          className="block text-xl font-semibold w-full border-t-2 border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
         >
           Orders
         </NavLink>
         <NavLink
           to="/admin/requests"
-          className="block text-xl font-semibold w-full border-y-2 border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="block text-xl font-semibold w-full border-y border-black hover:bg-slate-800 hover:text-white px-16  py-3"
         >
           Requests
         </NavLink>

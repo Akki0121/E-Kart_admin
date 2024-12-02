@@ -45,33 +45,33 @@ const Orders = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-slate-800 text-xl">
             {orders?.data?.map((elm, rowIndex) => (
               <tr className={rowIndex % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                <td className="px-4 py-2 border border-gray-300  ">
                   {elm?.generatedId}
                 </td>
-                <td className="px-4 py-2 border border-gray-300 text-md text-gray-600">
+                <td className="px-4 py-2 border border-gray-300  ">
                   {elm?.items?.map((el) => (
                     <ul>
                       <li>{el?.productId?.name}</li>
                     </ul>
                   ))}
                 </td>
-                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                <td className="px-4 py-2 border border-gray-300  ">
                   {elm?.items?.map((el) => (
                     <ul>
                       <li>{el?.quantity}</li>
                     </ul>
                   ))}
                 </td>
-                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                <td className="px-4 py-2 border border-gray-300  ">
                   {elm?.amount}
                 </td>
-                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600">
+                <td className="px-4 py-2 border border-gray-300  ">
                   {elm?.address}
                 </td>
-                <td className="px-4 py-2 border border-gray-300 text-lg text-gray-600 ">
+                <td className="px-4 py-2 border border-gray-300   ">
                   {String(elm?.payment) === "false" ? (
                     <ImCross className="text-red-600" />
                   ) : (

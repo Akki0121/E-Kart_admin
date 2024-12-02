@@ -4,14 +4,14 @@ import React from "react";
 const TableComponent = ({ columns, data }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse border border-gray-300">
+      <table className="min-w-full table-auto border-collapse ">
         <thead className="bg-slate-800">
           {/* bg-gray-200 */}
           <tr>
             {columns.map((column, index) => (
               <th
                 key={index}
-                className="px-4 py-2 border border-gray-300 text-left text-2xl font-medium text-white"
+                className="px-4 py-2 border border-slate-900 text-left text-2xl font-medium text-white"
               >
                 {column.header}
               </th>
@@ -27,7 +27,7 @@ const TableComponent = ({ columns, data }) => {
               {columns.map((column, colIndex) => (
                 <td
                   key={colIndex}
-                  className="px-4 py-2 border border-gray-300 text-lg text-gray-600"
+                  className="px-4 py-2 border border-slate-900 text-lg text-gray-800"
                 >
                   {column.field === "images" ? (
                     <img
