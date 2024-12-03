@@ -26,7 +26,7 @@ const Sidebar = () => {
   };
   return (
     <div className=" bg-slate-300 h-screen sticky top-0 border-r border-slate-800">
-      <div className="hidden bg-slate-800 md:flex justify-center">
+      <div className=" bg-slate-800 flex justify-end md:justify-center">
         <img className="w-44 h-14 px-2 py-2 " src={Logo} alt="logo image" />
       </div>
       <div className="bg-transparent md:bg-slate-300">
