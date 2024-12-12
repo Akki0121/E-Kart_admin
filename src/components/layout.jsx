@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Sidebar from "./sidebar";
 import HamSidebar from "./HamSidebar";
 
@@ -22,6 +23,9 @@ function layout() {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Panel</title>
+      </Helmet>
       <div className="flex ">
         {screenSize.width < 768 ? <HamSidebar /> : <Sidebar />}
         {/* <Sidebar /> */}

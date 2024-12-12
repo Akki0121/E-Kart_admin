@@ -10,8 +10,10 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl text-center my-3 font-semibold">Orders</h1>
+    <div className="px-4">
+      <h1 className="text-3xl text-white py-2 text-center my-3 font-semibold bg-slate-800 rounded-t-md shadow-md shadow-black">
+        Orders
+      </h1>
       {orders?.error && (
         <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
           {orders.error}

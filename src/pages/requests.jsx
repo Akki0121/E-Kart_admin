@@ -23,8 +23,10 @@ const Requests = () => {
   }));
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4 text-center">Requests</h1>
+    <div className="px-4">
+      <h1 className="text-3xl text-white py-2 text-center my-3 font-semibold bg-slate-800 rounded-t-md shadow-md shadow-black">
+        Requests
+      </h1>
       {requests?.error && (
         <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
           {requests?.error}

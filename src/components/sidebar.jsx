@@ -3,6 +3,14 @@ import { useContext } from "react";
 import Logo from "./images/logo.png";
 import axios from "axios";
 import { AdminContext } from "../context/adminContext";
+import {
+  FaUser,
+  FaSellcast,
+  FaProductHunt,
+  FaShoppingCart,
+  FaExchangeAlt,
+} from "react-icons/fa";
+import { RiProfileFill } from "react-icons/ri";
 
 const Sidebar = () => {
   const { checkAdminLoginStatus } = useContext(AdminContext);
@@ -16,7 +24,7 @@ const Sidebar = () => {
       );
       if (response.status === 200) {
         await checkAdminLoginStatus();
-        navigate("/");
+        navigate("/login");
       } else {
         console.log("error");
       }
@@ -25,51 +33,57 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className=" bg-slate-300 h-screen sticky top-0 border-r border-slate-800">
-      <div className=" bg-slate-800 flex justify-end md:justify-center">
+    <div className=" bg-slate-300 h-screen sticky top-0 shadow-lg shadow-gray-800">
+      <div className=" bg-slate-800 flex justify-center pb-2 shadow-sm shadow-gray-800">
         <img className="w-44 h-14 px-2 py-2 " src={Logo} alt="logo image" />
       </div>
-      <div className="bg-transparent md:bg-slate-300">
+      <div className="bg-transparent md:bg-slate-300 px-1">
         <NavLink
           to="/admin/dashboard"
-          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16 py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full  hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16 py-3"
         >
+          <RiProfileFill />
           Dashboard
         </NavLink>
         <NavLink
           to="/admin/users"
-          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full  hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16  py-3"
         >
+          <FaUser />
           Users
         </NavLink>
         <NavLink
           to="/admin/sellers"
-          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full  hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16  py-3"
         >
+          <FaSellcast />
           Sellers
         </NavLink>
         <NavLink
           to="/admin/products"
-          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full  hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16  py-3"
         >
+          <FaProductHunt />
           Products
         </NavLink>
         <NavLink
           to="/admin/orders"
-          className="block text-xl font-semibold w-full border-t border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full  hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16  py-3"
         >
+          <FaShoppingCart />
           Orders
         </NavLink>
         <NavLink
           to="/admin/requests"
-          className="block text-xl font-semibold w-full border-y border-black hover:bg-slate-800 hover:text-white px-16  py-3"
+          className="flex items-center gap-1 text-xl font-semibold w-full hover:bg-slate-800 hover:text-white hover:rounded-3xl my-2 px-16  py-3"
         >
+          <FaExchangeAlt />
           Requests
         </NavLink>
-        <div className="fixed bottom-6 left-12">
+        <div className="fixed bottom-6 left-14 pl-1">
           <button
             onClick={() => logoutbtn()}
-            className="bg-slate-800 px-8 py-1 rounded-md text-white text-xl font-semibold"
+            className="bg-slate-800 px-8 py-1 rounded-md text-white text-xl font-semibold shadow-md shadow-black"
           >
             Logout
           </button>

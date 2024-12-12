@@ -4,7 +4,7 @@ import React from "react";
 const TableComponent = ({ columns, data }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse ">
+      <table className="min-w-full table-auto border-collapse">
         <thead className="bg-slate-800">
           {/* bg-gray-200 */}
           <tr>

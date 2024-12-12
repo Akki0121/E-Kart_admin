@@ -42,8 +42,10 @@ const Products = () => {
   }));
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl text-center my-3 font-semibold">All Products</h1>
+    <div className="px-4">
+      <h1 className="text-3xl text-white py-2 text-center my-3 font-semibold bg-slate-800 rounded-t-md shadow-md shadow-black">
+        All Products
+      </h1>
       {products?.error && (
         <p className="text-red-700 font-semibold text-lg bg-red-200 rounded-md my-4">
           {error}

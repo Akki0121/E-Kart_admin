@@ -5,4 +5,6 @@
 .active {
   background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
   color: white;
+  border-radius: 25px;
+  box-shadow: 1px 1px 10px black;
 }

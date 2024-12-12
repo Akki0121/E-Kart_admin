@@ -44,35 +44,50 @@ function dashboard() {
         </p>
       ) : (
         <>
-          <div className="flex flex-wrap gap-10 w-full text-center">
-            <NavLink to="/admin/users" className="w-1/6">
-              <div className="w-full min-w-fit h-fit px-3 py-1 bg-orange-600 text-2xl font semibld rounded-xl shadow-lg shadow-orange-400">
+          <div className="flex flex-wrap gap-4 w-full text-center justify-center">
+            <NavLink
+              to="/admin/users"
+              className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6"
+            >
+              <div className="w-full min-w-fit h-fit px-3 py-1 bg-slate-800 text-slate-100 text-lg hover:text-orange-400 font-normal rounded-xl shadow-md hover:shadow-lg hover:shadow-black shadow-black">
                 <p>Total Users</p>
-                <p>{users?.count}</p>
+                <p>{users?.count || "--"}</p>
               </div>
             </NavLink>
-            <NavLink to="/admin/sellers" className="w-1/6">
-              <div className="w-full min-w-fit h-fit px-2 py-1 bg-orange-600 text-2xl font semibld rounded-xl shadow-lg shadow-orange-400">
+            <NavLink
+              to="/admin/sellers"
+              className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6"
+            >
+              <div className="w-full min-w-fit h-fit px-2 py-1 bg-slate-800 text-slate-100 text-lg hover:text-orange-400 font-normal rounded-xl shadow-md hover:shadow-lg hover:shadow-black shadow-black">
                 Total Sellers
-                <p>{sellers?.count}</p>
+                <p>{sellers?.count || "--"}</p>
               </div>
             </NavLink>
-            <NavLink to="/admin/products" className="w-1/6">
-              <div className="w-full min-w-fit h-fit px-2 py-1 bg-orange-600 text-2xl font semibld rounded-xl shadow-lg shadow-orange-400">
+            <NavLink
+              to="/admin/products"
+              className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6"
+            >
+              <div className="w-full min-w-fit h-fit px-2 py-1 bg-slate-800 text-slate-100 text-lg hover:text-orange-400 font-normal rounded-xl shadow-md hover:shadow-lg hover:shadow-black shadow-black">
                 Total Products
-                <p>{products?.count}</p>
+                <p>{products?.count || "--"}</p>
               </div>
             </NavLink>
-            <NavLink to="/admin/orders" className="w-1/6">
-              <div className="w-full min-w-fit h-fit px-2 py-1 bg-orange-600 text-2xl font semibld rounded-xl shadow-lg shadow-orange-400">
+            <NavLink
+              to="/admin/orders"
+              className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6"
+            >
+              <div className="w-full min-w-fit h-fit px-2 py-1 bg-slate-800 text-slate-100 text-lg hover:text-orange-400 font-normal rounded-xl shadow-md hover:shadow-lg hover:shadow-black shadow-black">
                 Total Orders
-                <p>{orders?.count}</p>
+                <p>{orders?.count || "--"}</p>
               </div>
             </NavLink>
-            <NavLink to="/admin/requests" className="w-1/6">
-              <div className="w-full min-w-fit h-fit px-2 py-1 bg-orange-600 text-2xl font semibld rounded-xl shadow-lg shadow-orange-400">
+            <NavLink
+              to="/admin/requests"
+              className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6"
+            >
+              <div className="w-full min-w-fit h-fit px-2 py-1 bg-slate-800 text-slate-100 text-lg hover:text-orange-400 font-normal rounded-xl shadow-md hover:shadow-lg hover:shadow-black shadow-black">
                 Total Requests
-                <p>{requests?.count}</p>
+                <p>{requests?.count || "--"}</p>
               </div>
             </NavLink>
           </div>
